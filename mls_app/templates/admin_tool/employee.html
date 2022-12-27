@@ -1,0 +1,44 @@
+{% extends 'layouts/layout.html' %}
+{% from 'bootstrap5/utils.html' import render_icon, render_messages %}
+{% from 'bootstrap5/table.html' import render_table %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+
+
+{% block content %}
+<section class="colored-section" id="user_profile_tools">
+    <div class="row">
+        <div>
+            <h5>{{ render_icon('people-fill') }} Employee</h5>
+        </div>
+        <div >
+            {{ render_messages(dismissible=True, dismiss_animate=True) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-5">
+            {{ render_table(
+            data=data,
+            titles=[
+            ('id', '#'),
+            ('first_name', 'First'),
+            ('last_name', 'Family'),
+            ('birthday', 'Birthday'),
+            ('mobile_no', 'Cellphone'),
+            ],
+            caption='List of employees',
+            table_classes='table-sm table-hover table-striped',
+            show_actions=True,
+            model=object,
+            view_url=('admin_tool.employee_view', [('emp_id', ':id')]),
+            edit_url=('admin_tool.employee_edit', [('emp_id', ':id')]),
+            delete_url=('admin_tool.employee_delete', [('emp_id', ':id')]),
+            new_url=('admin_tool.employee_add'),
+            ) }}
+
+            {{ render_pagination(page) }}
+        </div>
+    </div>
+</section>
+
+{% include 'includes/footer.html' %}
+{% endblock %}

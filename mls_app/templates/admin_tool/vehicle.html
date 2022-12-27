@@ -1,0 +1,47 @@
+{% extends 'layouts/layout.html' %}
+{% from 'bootstrap5/utils.html' import render_icon, render_messages %}
+{% from 'bootstrap5/table.html' import render_table %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+
+
+{% block content %}
+<section class="colored-section" id="user_profile_tools">
+    <div class="row">
+        <div>
+            <h5>{{ render_icon('truck-flatbed', '1.5em') }} Asset</h5>
+        </div>
+        <div >
+            {{ render_messages(dismissible=True, dismiss_animate=True) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-5">
+            {{ render_table(
+            data=data,
+            titles=[
+            ('id', '#'),
+            ('maker', 'maker'),
+            ('model', 'model'),
+            ('year', 'year'),
+            ('plate_no', 'Plate no'),
+            ('last_registration', 'Registered'),
+            ('odo', 'Odo'),
+            ('odo_updated', 'Odo taken'),
+            ],
+            caption='Vehicle assets list',
+            table_classes='table-sm table-hover table-striped',
+            show_actions=True,
+            model=object,
+            view_url=('admin_tool.vehicle_view', [('vehicle_id', ':id')]),
+            edit_url=('admin_tool.vehicle_edit', [('vehicle_id', ':id')]),
+            delete_url=('admin_tool.vehicle_delete', [('vehicle_id', ':id')]),
+            new_url=('admin_tool.vehicle_add'),
+            ) }}
+
+            {{ render_pagination(page) }}
+        </div>
+    </div>
+</section>
+
+{% include 'includes/footer.html' %}
+{% endblock %}

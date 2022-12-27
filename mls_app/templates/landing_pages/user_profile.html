@@ -1,0 +1,139 @@
+{% extends 'layouts/layout.html' %}
+{% from 'bootstrap5/utils.html' import render_icon %}
+
+{% block content %}
+<!--            Admin tools-->
+<section class="colored-section" id="user_profile_tools">
+
+<!--    transaction-->
+    <div class="row mb-3">
+        <h4>{{ render_icon('keyboard-fill') }} Admin tools</h4>
+        <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
+           <div class="card" style="width: 20rem;">
+               <div class="card-body">
+                   <h5 class="card-title">{{render_icon('briefcase-fill', '2em')}}</h5>
+                   <h6 class="card-subtitle mb-3 text-muted">Transaction</h6>
+                   <p class="card-text"></p>
+                   <a class="btn btn-primary btn-sm me-3" href="{{url_for('admin_tool.transaction')}}"> {{ render_icon('cash') }} Transact </a>
+                   <a class="btn btn-outline-primary btn-sm " href="{{url_for('admin_tool.transaction_view')}}"> {{ render_icon('clock-history') }} History </a>
+               </div>
+            </div>
+        </div>
+
+<!--        invoicing-->
+        <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
+           <div class="card" style="width: 20rem;">
+               <div class="card-body">
+                   <h5 class="card-title">{{render_icon('file-earmark-text-fill', '2em')}}</h5>
+                   <h6 class="card-subtitle mb-3 text-muted">Invoicing</h6>
+                   <p class="card-text"></p>
+                   <a class="btn btn-primary btn-sm me-3" href="{{url_for('invoice.invoice_create_s1')}}"> {{ render_icon('printer-fill') }} Create </a>
+                   <a class="btn btn-outline-primary btn-sm " href="{{url_for('invoice.invoice')}}"> {{ render_icon('zoom-in') }} View </a>
+               </div>
+            </div>
+        </div>
+
+<!--        employee-->
+        <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
+           <div class="card" style="width: 20rem;">
+               <div class="card-body">
+                   <h5 class="card-title">{{render_icon('people-fill', '2em')}}</h5>
+                   <h6 class="card-subtitle mb-3 text-muted">Employee</h6>
+                   <p class="card-text"></p>
+                   <a class="btn btn-primary btn-sm me-3" href="{{ url_for('admin_tool.employee_add') }}"> {{ render_icon('plus') }} Add </a>
+                   <a class="btn btn-outline-primary btn-sm " href="{{ url_for('admin_tool.employee') }}"> {{ render_icon('zoom-in') }} View </a>
+               </div>
+            </div>
+        </div>
+
+<!--        tariff-->
+        <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
+           <div class="card" style="width: 20rem;">
+               <div class="card-body">
+                   <h5 class="card-title">{{render_icon('clipboard-data', '2em')}}</h5>
+                   <h6 class="card-subtitle mb-3 text-muted">Tariff</h6>
+                   <p class="card-text"></p>
+                   <a class="btn btn-primary btn-sm me-3" href="{{ url_for('admin_tool.tariff_add') }}"> {{ render_icon('plus') }} Add </a>
+                   <a class="btn btn-outline-primary btn-sm " href="{{ url_for('admin_tool.tariff') }}"> {{ render_icon('zoom-in') }} View </a>
+               </div>
+            </div>
+        </div>
+
+<!--        vehicle-->
+        <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
+           <div class="card" style="width: 20rem;">
+               <div class="card-body">
+                   <h5 class="card-title">{{render_icon('truck-flatbed', '2em')}}</h5>
+                   <h6 class="card-subtitle mb-3 text-muted">Vehicle asset</h6>
+                   <p class="card-text"></p>
+                   <a class="btn btn-primary btn-sm me-3" href="{{ url_for('admin_tool.vehicle_add') }}"> {{ render_icon('plus') }} Add </a>
+                   <a class="btn btn-outline-primary btn-sm " href="{{ url_for('admin_tool.vehicle') }}"> {{ render_icon('zoom-in') }} View </a>
+               </div>
+            </div>
+        </div>
+
+<!--        add user-->
+        {% if current_user.user_type == 'super_admin' %}
+        <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
+           <div class="card" style="width: 20rem;">
+               <div class="card-body">
+                   <h5 class="card-title">{{render_icon('person', '2em')}}</h5>
+                   <h6 class="card-subtitle mb-3 text-muted">Users</h6>
+                   <p class="card-text"></p>
+                   <a class="btn btn-primary btn-sm me-3" href="{{ url_for('auth.register') }}"> {{ render_icon('plus') }} Add </a>
+                   <a class="btn btn-outline-primary btn-sm " href="{{url_for('admin_tool.user')}}"> {{ render_icon('zoom-in') }} View </a>
+               </div>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+
+<!--        encoder tools-->
+<section>
+
+<!--    dispatch-->
+    <div class="row mb-3">
+        <h4>{{ render_icon('keyboard-fill') }} Encoding tools</h4>
+        <div class="col mb-3">
+           <div class="card" style="width: 20rem;">
+               <div class="card-body">
+                   <h5 class="card-title">{{render_icon('truck', '2em')}}</h5>
+                   <h6 class="card-subtitle mb-3 text-muted">Dispatch</h6>
+                   <p class="card-text"></p>
+                   <a class="btn btn-primary btn-sm me-3" href="{{url_for('encoder_tool.dispatch_add')}}"> {{ render_icon('book-fill') }} Encode </a>
+                   <a class="btn btn-outline-primary btn-sm " href="{{url_for('encoder_tool.dispatch')}}"> {{ render_icon('zoom-in') }} View </a>
+               </div>
+            </div>
+        </div>
+
+<!--        maintenance-->
+        <div class="col mb-3">
+           <div class="card" style="width: 20rem;">
+               <div class="card-body">
+                   <h5 class="card-title">{{render_icon('gear', '2em')}}</h5>
+                   <h6 class="card-subtitle mb-3 text-muted">Maintenance</h6>
+
+                   <a class="btn btn-primary btn-sm me-3" href="{{url_for('encoder_tool.maintenance_add')}}"> {{ render_icon('book-fill') }} Encode </a>
+                   <a class="btn btn-outline-primary btn-sm " href="{{url_for('encoder_tool.maintenance')}}"> {{ render_icon('zoom-in') }} View </a>
+               </div>
+            </div>
+        </div>
+
+<!--        expenses-->
+        <div class="col mb-3">
+           <div class="card" style="width: 20rem;">
+               <div class="card-body">
+                   <h5 class="card-title">{{render_icon('cash-coin', '2em')}}</h5>
+                   <h6 class="card-subtitle mb-3 text-muted">Expenses</h6>
+                   <p class="card-text"></p>
+                   <a class="btn btn-primary btn-sm me-3" href="{{url_for('encoder_tool.expenses_add')}}"> {{ render_icon('book-fill') }} Encode </a>
+                   <a class="btn btn-outline-primary btn-sm " href="{{url_for('encoder_tool.expenses')}}"> {{ render_icon('zoom-in') }} View </a>
+               </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'includes/footer.html' %}
+{% endblock %}

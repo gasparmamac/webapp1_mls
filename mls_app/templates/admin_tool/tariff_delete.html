@@ -1,0 +1,28 @@
+{% extends 'layouts/layout.html' %}
+{% from 'bootstrap5/utils.html' import render_icon %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+<section class="white-section" id="title">
+    <div class="container my-5">
+        <div class="row">
+            <div class="col text-center mb-5">
+                <div class="card bg-danger bg-opacity-25">
+                    <div class="card-body">
+                        <h5 class="card-title">Delete this tariff rate?</h5>
+                        <h6 class="card-subtitle mb-2 text-danger"><strong>Note: </strong>This action is irreversible.</h6>
+                        <p class="card-text">We cannot retrieve this data once deleted. So make sure that you know what you are doing.</p>
+                        <form action="{{url_for('admin_tool.tariff_delete',tariff_id=tariff_id)}}" method="post">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            <button type="submit" class="btn btn-danger mb-3 me-3" name="delete_button" value="cancel">Cancel</button>
+                            <button type="submit" class="btn btn-outline-danger mb-3" name="delete_button" value="confirm">Confirm</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'includes/footer.html' %}
+{% endblock %}

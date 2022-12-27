@@ -1,0 +1,16 @@
+{% extends 'layouts/layout.html' %}
+{% from 'bootstrap5/utils.html' import render_icon %}
+
+{% block content %}
+<section class="white-section" id="title">
+    <div class="container my-5">
+        <div class="row">
+            <div class="col">
+                <h1>{{ render_icon('info-circle-fill') }} About</h1>
+                <p class="text-muted">This website is used by and licensed to Mamac Logistics Services.</p>
+                </div>
+        </div>
+    </div>
+</section>
+{% include 'includes/footer.html' %}
+{% endblock %}

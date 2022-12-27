@@ -1,0 +1,50 @@
+{% extends 'layouts/layout.html' %}
+{% from 'bootstrap5/utils.html' import render_icon, render_messages %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+
+
+{% block content %}
+<section>
+    <div class="row">
+        <div class="col">
+            <div class="mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Payroll date: {{datum.date}}</h5>
+                    <table class="table table-hover table-striped table-sm">
+                        <caption></caption>
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Code</th>
+                            <th scope="col">Slip</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Vehicle</th>
+                            <th scope="col">Driver</th>
+                            <th scope="col">Courier</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+
+                        {% for dispatch in datum.dispatches %}
+                        <tr>
+                            <td>{{dispatch.id}}</td>
+                            <td>{{dispatch.date}}</td>
+                            <td>{{dispatch.wd_code}}</td>
+                            <td>{{dispatch.slip}}</td>
+                            <td>{{dispatch.destination}}</td>
+                            <td>{{dispatch.plate_no}}</td>
+                            <td>{{dispatch.driver}}</td>
+                            <td>{{dispatch.helper}}</td>
+                          </tr>
+                          {% endfor %}
+                          </tbody>
+                    </table>
+                </div>
+            </div>
+          </div>
+    </div>
+</section>
+
+{% include 'includes/footer.html' %}
+{% endblock %}

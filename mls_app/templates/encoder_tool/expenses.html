@@ -1,0 +1,53 @@
+{% extends 'layouts/layout.html' %}
+{% from 'bootstrap5/utils.html' import render_icon, render_messages %}
+{% from 'bootstrap5/table.html' import render_table %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+{% from 'bootstrap5/form.html' import render_form_row %}
+
+{% block content %}
+<!--title-->
+<section class="colored-section my-3" id="user_profile_tools">
+    <div class="row">
+        <div >
+            {{ render_messages(dismissible=True, dismiss_animate=True) }}
+        </div>
+        <div class="col my-3">
+            <h5>{{ render_icon('cash-coin') }} Expenses    </h5>
+            <div class="bg-secondary bg-opacity-10">
+                <div class="card-body">
+                    <form action="{{url_for('encoder_tool.expenses')}}" method="post">
+                        {{form.csrf_token()}}
+                        {{render_form_row([form.from_, form.to_, form.transaction, form.select], form_type='basic')}}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-5">
+            {{ render_pagination(page) }}
+            {{ render_table(
+            data=data,
+            titles=[
+            ('id', '#'),
+            ('date', 'Date'),
+            ('amount', 'Amount'),
+            ('purpose', 'Purpose'),
+            ('encoded_by', 'Encoder'),
+
+            ],
+            caption=table_caption,
+            table_classes='table-sm table-hover table-striped',
+            show_actions=True,
+            model=object,
+            view_url=('encoder_tool.expenses_view', [('expense_id', ':id')]),
+            edit_url=('encoder_tool.expenses_edit', [('expense_id', ':id')]),
+            delete_url=('encoder_tool.expenses_delete', [('expense_id', ':id')]),
+            new_url=('encoder_tool.expenses_add'),
+            ) }}
+        </div>
+    </div>
+</section>
+
+{% include 'includes/footer.html' %}
+{% endblock %}

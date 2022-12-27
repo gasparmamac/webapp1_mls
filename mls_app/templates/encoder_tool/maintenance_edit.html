@@ -1,0 +1,31 @@
+{% extends 'layouts/layout.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% from 'bootstrap5/utils.html' import render_messages, render_icon %}
+
+{% block content %}
+<section class="white-section" id="title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-auto mb-5">
+                <div style="width: 21rem;">
+                    {{ render_messages(dismissible=True, dismiss_animate=True) }}
+                </div>
+                <div class="card" style="width: 21rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Edit maintenance record</h5>
+                        <hr>
+                        {{ render_form(
+                        form=form,
+                        button_map={
+                        'confirm': 'btn btn-primary me-3',
+                        'cancel': 'btn btn-outline-primary',
+                        },
+                        ) }}
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'includes/footer.html' %}
+{% endblock %}

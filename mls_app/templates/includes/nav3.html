@@ -1,0 +1,32 @@
+{% from 'bootstrap5/nav.html' import render_nav_item %}
+{% from 'bootstrap5/utils.html' import render_icon %}
+
+<section class="d-print-none" id="title">
+    <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        {% if current_user.is_active %}
+        <a class="navbar-brand" href="{{url_for('user_profile')}}">mls</a>
+        {% else %}
+        <a class="navbar-brand" href="{{url_for('index')}}">mls</a>
+        {% endif %}
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">{{ render_icon('list', '1.5em') }}</span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+                 {% if current_user.is_active %}
+                    {{ render_nav_item('kpi.dashboard', render_icon('bar-chart')+'Kpi') }}
+                {% endif %}
+                {{ render_nav_item('contact', render_icon('telephone')+'Contact us') }}
+                {{ render_nav_item('about', render_icon('info-circle')+'About') }}
+
+                {% if current_user.is_active %}
+                    {{ render_nav_item('auth.logout', render_icon('box-arrow-left')+'Logout') }}
+                {% endif %}
+            </ul>
+
+        </div>
+    </div>
+    </nav>
+    <hr>
+</section>

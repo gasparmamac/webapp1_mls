@@ -1,0 +1,86 @@
+{% extends 'layouts/layout.html' %}
+{% from 'bootstrap5/utils.html' import render_icon, render_messages %}
+{% from 'bootstrap5/table.html' import render_table %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+<!--title-->
+<div class="row">
+    <div >
+        {{ render_messages(dismissible=True, dismiss_animate=True) }}
+    </div>
+    <div class="col my-3 justify-content-end">
+        <h5>{{ render_icon('file-earmark-text-fill') }} Invoices</h5>
+        <div class="bg-secondary bg-opacity-10 d-print-none">
+            <div class="card-body">
+                <form action="{{url_for('invoice.invoice')}}" method="post">
+                   {{form.csrf_token()}}
+                   {{render_form(form)}}
+               </form>
+           </div>
+        </div>
+    </div>
+</div>
+
+
+<!--pagination-->
+<div class="row">
+    <div class="col d-print-none">
+            {{ render_pagination(data) }}
+    </div>
+    <div class="col text-end">
+        <a href="{{url_for('invoice.invoice_create_s1')}}" class="btn btn-outline-primary position-relative">
+            {{render_icon('file-earmark-text-fill')}} Create Invoice
+            {% if disp_count %}
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{disp_count}}
+                </span>
+            {% endif %}
+        </a>
+
+    </div>
+</div>
+
+<!--table-->
+<div class="row">
+    <div class="col">
+        <table class="table table-striped table-hover table-sm table-responsive">
+                <caption class="fs-6 fw-lighter">legend: norm (x1), hol (x2), sp (x1.3), rd (x1.5)</caption>
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Inv#</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Adj</th>
+                    <th scope="col">Adj_remarks</th>
+                    <th scope="col">OR#</th>
+                    <th scope="col">Amount_paid</th>
+                    <th scope="col">*</th>
+                    <th scope="col">**</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                    {% for row in data %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{row.date}}</td>
+                        <td>{{row.ctrl_no}}</td>
+                        <td>{{row.amount|peso_format}}</td>
+                        <td>{{row.adjustment}}</td>
+                        <td>{{row.remarks}}</td>
+                        <td>{{row.or_no}}</td>
+                        <td>{{row.amount_paid}}</td>
+                        <td><a href="{{url_for('invoice.invoice_print', invoice_id=row.id)}}">{{render_icon('printer-fill')}}</a></td>
+                        <td><a href="{{url_for('invoice.invoice_edit', invoice_id=row.id)}}">{{render_icon('pencil-fill')}}</a></td>
+                    </tr>
+                    {% endfor %}
+
+              </tbody>
+            </table>
+    </div>
+</div>
+{% include 'includes/footer.html' %}
+{% endblock %}

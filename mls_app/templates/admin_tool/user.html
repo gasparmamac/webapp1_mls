@@ -1,0 +1,47 @@
+{% extends 'layouts/layout.html' %}
+{% from 'bootstrap5/utils.html' import render_icon, render_messages %}
+{% from 'bootstrap5/table.html' import render_table %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+
+
+{% block content %}
+<div class="row">
+    <div>
+        <h5>{{ render_icon('person', '1.5em') }} Users</h5>
+    </div>
+    <div>
+        {{ render_messages(dismissible=True, dismiss_animate=True) }}
+    </div>
+</div>
+
+<!--table-->
+<div class="row">
+    <div class="col">
+        {{ render_table(
+        data=page,
+        titles=[
+        ('id', '#'),
+        ('name', 'Name'),
+        ('user_type', 'Type'),
+        ('email', 'Email'),
+        ('password', 'Password'),
+        ('last_login', 'Last_login'),
+        ('encoded_by', 'Encoded_by'),
+        ('encoded_on', 'Encoded_on'),
+        ('edited_by', 'Edited_by'),
+        ('edited_on', 'Edited_on'),
+        ],
+        caption='',
+        table_classes='table-sm table-hover table-striped',
+        responsive=True,
+        show_actions=True,
+        model=object,
+        delete_url=('auth.delete_user', [('user_name', ':name')]),
+        ) }}
+
+<!--        pagination-->
+        {{ render_pagination(page) }}
+    </div>
+</div>
+{% include 'includes/footer.html' %}
+{% endblock %}

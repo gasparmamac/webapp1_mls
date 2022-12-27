@@ -1,0 +1,21 @@
+{% extends 'layouts/layout.html' %}
+{% from 'bootstrap5/utils.html' import render_icon, render_messages %}
+{% from 'bootstrap5/table.html' import render_table %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+<div class="row">
+  <div class="col">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">INVOICE#: {{inv.ctrl_no}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Update invoice payment</h6>
+        {{ render_form(form) }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'includes/footer.html' %}
+{% endblock %}

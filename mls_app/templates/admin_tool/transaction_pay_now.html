@@ -1,0 +1,20 @@
+{% extends 'layouts/layout.html' %}
+{% from 'bootstrap5/utils.html' import render_icon %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+<section class="white-section" id="title">
+    <div class="container my-5">
+        <div class="row">
+            <div class="col mb-5">
+                <div class="card-body">
+                    <h5 class="card-title">Amount to transfer: <strong>{{session.get('grand_total')}}</strong></h5>
+                    {{render_form(form, button_map={'cancel': 'outline-primary ms-3'})}}
+
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'includes/footer.html' %}
+{% endblock %}

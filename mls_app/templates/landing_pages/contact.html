@@ -1,0 +1,17 @@
+{% extends 'layouts/layout.html' %}
+{% from 'bootstrap5/utils.html' import render_icon %}
+
+{% block content %}
+<section class="white-section" id="title">
+    <div class="container my-5">
+        <div class="row">
+            <div class="col">
+                <h1>{{ render_icon('telephone-forward-fill') }} Contact</h1>
+                <span class="text-muted">For any concern, kindly contact this number (+63) 917-5143642.</span>
+                <p class="text-muted">Or send an email to <u>gaspar.mamac@gmail.com</u></p>
+                </div>
+        </div>
+    </div>
+</section>
+{% include 'includes/footer.html' %}
+{% endblock %}
