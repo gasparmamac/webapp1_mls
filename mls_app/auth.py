@@ -141,56 +141,61 @@ def register():
 @login_required
 def delete_user(user_name):
     # check encoding activities
-    dispatch_ = db.session.execute(db.select(Dispatch).filter(
-        Dispatch.encoded_by == user_name
+    user = db.session.execute(db.select(User).filter(
+        User.name == user_name
     )).scalar()
 
-    if not dispatch_:
-        maintenance_ = db.session.execute(db.select(Maintenance).filter(
-            Maintenance.encoded_by == user_name
+    if user.user_type != 'super_admin':
+        dispatch_ = db.session.execute(db.select(Dispatch).filter(
+            Dispatch.encoded_by == user_name
         )).scalar()
 
-        if not maintenance_:
-            expenses_ = db.session.execute(db.select(Expense).filter(
-                Expense.encoded_by == user_name
+        if not dispatch_:
+            maintenance_ = db.session.execute(db.select(Maintenance).filter(
+                Maintenance.encoded_by == user_name
             )).scalar()
 
-            if not expenses_:
-                vehicle_ = db.session.execute(db.select(Vehicle).filter(
-                    Vehicle.encoded_by == user_name
+            if not maintenance_:
+                expenses_ = db.session.execute(db.select(Expense).filter(
+                    Expense.encoded_by == user_name
                 )).scalar()
 
-                if not vehicle_:
-                    tariff_ = db.session.execute(db.select(Tariff).filter(
-                        Tariff.encoded_by == user_name
+                if not expenses_:
+                    vehicle_ = db.session.execute(db.select(Vehicle).filter(
+                        Vehicle.encoded_by == user_name
                     )).scalar()
 
-                    if not tariff_:
-                        employee_ = db.session.execute(db.select(Employee).filter(
-                            Employee.encoded_by == user_name
+                    if not vehicle_:
+                        tariff_ = db.session.execute(db.select(Tariff).filter(
+                            Tariff.encoded_by == user_name
                         )).scalar()
 
-                        if not employee_:
-                            invoice_ = db.session.execute(db.select(Invoice).filter(
-                                Invoice.edited_by == user_name
+                        if not tariff_:
+                            employee_ = db.session.execute(db.select(Employee).filter(
+                                Employee.encoded_by == user_name
                             )).scalar()
 
-                            if not invoice_:
-                                transaction_ = db.session.execute(db.select(Transaction).filter(
-                                    Transaction.encoded_by == user_name
+                            if not employee_:
+                                invoice_ = db.session.execute(db.select(Invoice).filter(
+                                    Invoice.edited_by == user_name
                                 )).scalar()
 
-                                # This user has not encoded anything. Ok to delete
-                                user_ = db.session.execute(db.select(User).filter(
-                                    User.name == user_name
-                                )).scalar()
+                                if not invoice_:
+                                    transaction_ = db.session.execute(db.select(Transaction).filter(
+                                        Transaction.encoded_by == user_name
+                                    )).scalar()
 
-                                db.session.delete(user_)
-                                db.session.commit()
+                                    # This user has not encoded anything. Ok to delete
+                                    user_ = db.session.execute(db.select(User).filter(
+                                        User.name == user_name
+                                    )).scalar()
 
-                                flash('User successfully delete', 'success')
+                                    db.session.delete(user_)
+                                    db.session.commit()
 
-                                return redirect(url_for('admin_tool.user'))
+                                    flash('User successfully delete', 'success')
+
+                                    return redirect(url_for('admin_tool.user'))
 
     else:
         flash(f'Cannot delete this account.', 'danger')
