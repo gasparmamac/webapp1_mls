@@ -107,7 +107,7 @@ def create_pdf(ctrl_no, header, address, landline, cellphone,
     pdf.add_page()
 
     # Company
-    pdf.set_font('helvetica', 'B', 12)
+    pdf.set_font('helvetica', 'B', 20)
     pdf.cell(0, 8, header, ln=1, border=0)
     # Address
     pdf.set_font('helvetica', '', 8)

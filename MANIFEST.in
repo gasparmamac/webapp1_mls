@@ -1,0 +1,4 @@
+
+graft mls_app/static
+graft mls_app/templates
+global-exclude *.pyc

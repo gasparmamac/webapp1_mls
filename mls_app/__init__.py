@@ -34,44 +34,14 @@ def register_blueprints(app):
     app.register_blueprint(kpi_bp)
 
 
-def create_app(test_config=None):
+def create_app():
     # create and config the app
-    app = Flask(__name__, instance_relative_config=True)
-
-    # my default configuration values
-    app.config.from_mapping(
-        DEBUG=True,
-        TESTING=False,
-        SECRET_KEY='dev',
-        # sqlalchemy
-        SQLALCHEMY_TRACK_MODIFICATIONS=True,
-        SQLALCHEMY_DATABASE_URI=f'sqlite:////{os.path.join(app.instance_path, "mls.db")}',
-        # invoice related variables
-        INVOICE_FOLDER=os.path.join(app.instance_path, 'Invoices')
-    )
-
-    if test_config is None:
-        # load the config.py inside the instance folder, if it exists, when not testing or in production.
-        app.config.from_pyfile('config.py', silent=True)
-    else:
-        # load the test config if passed in
-        app.config.from_pyfile(test_config)
-
-    # ensure the instance folder exists
-    try:
-        os.makedirs(app.instance_path)
-    except OSError:
-        pass
-
-    try:
-        os.makedirs(os.path.join(app.instance_path, 'Invoices'))
-    except OSError:
-        pass
+    app = Flask(__name__, instance_relative_config=False)
+    app.config.from_object('config.DevelopmentConfig')
 
     """initialize extensions and register blueprints"""
     initialize_extensions(app)
     register_blueprints(app)
-
     with app.app_context():
         db.create_all()
 
