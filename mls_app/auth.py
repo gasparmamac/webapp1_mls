@@ -50,7 +50,7 @@ def super_admin_only(view):
     return wrapped_view
 
 
-@auth_bp.route('/register_first_user' + secrets.token_urlsafe(256), methods=('GET', 'POST'))
+@auth_bp.route('/register_first_user=' + secrets.token_urlsafe(), methods=('GET', 'POST'))
 def register_first_user():
     form = RegisterForm()
     if form.validate_on_submit():
@@ -78,7 +78,7 @@ def register_first_user():
                            )
 
 
-@auth_bp.route('/forget_password' + secrets.token_urlsafe(256), methods=('GET', 'POST'))
+@auth_bp.route('/forget_password=' + secrets.token_urlsafe(), methods=('GET', 'POST'))
 def forget_password():
     form1 = ForgetPasswordForm()
 
