@@ -5,6 +5,11 @@ from dotenv import load_dotenv
 basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(basedir, '.env'))
 
+# postgresql - sqlalchemy compatibility problem solution
+uri = os.getenv("DATABASE_URL")  # or other relevant config var
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+
 
 class Config:
     # invoice related variables
@@ -35,7 +40,7 @@ class ProductionConfig(Config):
 
     # sqlalchemy
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', os.path.join(f"sqlite:////{basedir}", "mls.db")
+    SQLALCHEMY_DATABASE_URI = os.environ.get(uri, os.path.join(f"sqlite:////{basedir}", "mls.db")
 )
 
 
