@@ -294,7 +294,7 @@ def invoice_create_s1():
                            )
 
 
-@invoicing_bp.route('/invoice_view/<int:invoice_id>', methods=('GET', 'POST'))
+@invoicing_bp.route('/invoice_print/<int:invoice_id>', methods=('GET', 'POST'))
 @login_required
 def invoice_print(invoice_id):
     data = db.get_or_404(Invoice, invoice_id)
