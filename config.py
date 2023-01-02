@@ -29,13 +29,14 @@ class DevelopmentConfig(Config):
 
 class ProductionConfig(Config):
     # default variables
-    FLASK_ENV = 'develop'
+    FLASK_ENV = 'production'
     DEBUG = False
     TESTING = False
 
     # sqlalchemy
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:////mls.db)'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', os.path.join(f"sqlite:////{basedir}", "mls.db")
+)
 
 
 
