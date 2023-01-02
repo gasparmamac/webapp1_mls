@@ -26,7 +26,6 @@ class DevelopmentConfig(Config):
     # default variables
     FLASK_ENV = 'development'
     DEBUG = True
-    TESTING = True
 
     # sqlalchemy
     SQLALCHEMY_TRACK_MODIFICATIONS = True
@@ -36,8 +35,7 @@ class DevelopmentConfig(Config):
 class ProductionConfig(Config):
     # default variables
     FLASK_ENV = 'production'
-    DEBUG = False
-    TESTING = False
+    DEBUG = True
 
     # sqlalchemy
     SQLALCHEMY_TRACK_MODIFICATIONS = True
