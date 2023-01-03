@@ -41,6 +41,6 @@ class ProductionConfig(Config):
 
     # sqlalchemy
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get(f"{uri}")
+    SQLALCHEMY_DATABASE_URI = uri
 
     # SQLALCHEMY_DATABASE_URI = os.environ.get(f"{uri}", os.path.join(f"sqlite:////{basedir}", "mls.db"))
