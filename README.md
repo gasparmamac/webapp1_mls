@@ -1,6 +1,6 @@
 # webapp1_mls
 Description:
-  - A simple web application for my logistics and trucking business. It comes with payroll system and semi-auto invoicing.
+  - A simple web application for my logistics and trucking business. It comes with payroll system and invoicing.
   
 How to use it:
   1. Clone and install the necessary packages from the requirements.txt.
